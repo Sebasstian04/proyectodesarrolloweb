@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.poli.mail.model.Mail;
 import controllervo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -99,4 +101,9 @@ public class UsuariosController {
 		return ResponseEntity.ok(this.usuariosService.findAll());
 	}
 	
+	@RequestMapping(value = "/api/v1/msg", method=RequestMethod.GET)
+	public String sendEmail(@RequestBody Mail mail){
+		Usuarios.Service.sendEmail(mail);
+		return "Email sent successfully";
+	}
 }
